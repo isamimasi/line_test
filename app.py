@@ -12,15 +12,13 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-from __future__ import unicode_literals
-
 import os
 import sys
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
 from linebot import (
-    LineBotApi, WebhookParser
+    LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
     InvalidSignatureError
@@ -42,38 +40,84 @@ if channel_access_token is None:
     sys.exit(1)
 
 line_bot_api = LineBotApi(channel_access_token)
-parser = WebhookParser(channel_secret)
+handler = WebhookHandler(channel_secret)
 
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    # parse webhook body
+    # handle webhook body
     try:
-        events = parser.parse(body, signature)
+        handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
 
-    # if event is MessageEvent and message is TextMessage, then echo text
-    for event in events:
-        print (evet)
-        print (event.message)
-        if not isinstance(event, MessageEvent):
-            continue
-        if not isinstance(event.message, TextMessage):
-            continue
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text)
-        )
-
     return 'OK'
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def message_text(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text)
+    )
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_sticker_message(event):
+    stocksticker=["1-2","1-5","1-10","1-13","1-14"
+                  ,"1-17"
+                  ,"1-114"
+                  ,"1-117"
+                  ,"1-119"
+                  ,"1-120"
+                  ,"1-124"
+                  ,"1-125"
+                  ,"1-130"
+                  ,"1-407"
+                  ,"1-409"
+                  ,"1-410"
+                  ,"2-28"
+                  ,"2-34"
+                  ,"2-36"
+                  ,"2-156"
+                  ,"2-157"
+                  ,"2-164"
+                  ,"2-156"
+                  ,"2-167"
+                  ,"2-171"
+                  ,"2-172"
+                  ,"2-175"
+                  ,"2-176"
+                  ,"2-501"
+                  ,"2-513"
+                  ,"2-516"
+                  ,"3-180"
+                  ,"3-181"
+                  ,"3-182"
+                  ,"3-183"
+                  ,"3-184"
+                  ,"3-191"
+                  ,"3-193"
+                  ,"3-198"
+                  ,"3-199"
+                  ,"3-200"
+                  ,"3-203"
+                  ,"3-204"
+                  ,"3-209"
+                  ]
+    AA= (stocksticker[random.randrange(len(stocksticker))])
+    A1=AA.split("-")
+    line_bot_api.reply_message(
+        event.reply_token,
+        StickerSendMessage(
+            package_id=A1[0],
+            sticker_id=A1[1])
+    )
 
 
 if __name__ == "__main__":
