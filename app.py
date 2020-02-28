@@ -61,6 +61,7 @@ def callback():
 
     # if event is MessageEvent and message is TextMessage, then echo text
     for event in events:
+        print (evet)
         print (event.message)
         if not isinstance(event, MessageEvent):
             continue
