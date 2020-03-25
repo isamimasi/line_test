@@ -1,0 +1,37 @@
+										{% extends "layout_noMenu_no_autocomplete.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+
+
+
+<div id="contents">
+    <div class="container">
+        <main id="main" role="main">
+            <article>
+                <div id="mainVisual">
+                <section>
+<div style="text-align:center">
+<h3>cookie sample</h3>
+<form action="trPost" method="POST" class="form-inline">
+<input type="hidden" id="pathID" name="pathID" value="cookie">
+Cookie Name:
+<input type="text" id="cookieName_t" name="cookieName_t" value="cookie_sample"><br>
+<input type="hidden" id="cookieName" name="cookieName" value="cookie_sample">
+cookieVariable1
+<input type="text" id="cookieVariable1" name="cookieVariable1"><br>
+cookieVariable2
+<input type="text" id="cookieVariable2" name="cookieVariable2"><br>
+<br>
+<button type="submit" name="submission" class="btn-square-pop01" value="submission_result"> 　追　加 　</button>
+
+ </section>
+ <section>
+ {{Dict["cookieDict"]}}
+ </section>
+</div>
+</article>
+</main>
+</div>
+</div>
+{% endblock %}

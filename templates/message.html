@@ -1,0 +1,21 @@
+{% extends "layout_noMenu_no_autocomplete.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="text-align:center"><h1>{{Dict['message1']}}</h1></div>
+
+<br>
+
+<div style="text-align:center"><p>{% for sentence in Dict["message2"]%}
+					{{sentence}}<br>{% endfor %}</p></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

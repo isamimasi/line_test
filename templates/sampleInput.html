@@ -1,0 +1,29 @@
+										{% extends "layout_noMenu_no_autocomplete.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+
+
+
+<div id="contents">
+    <div class="container">
+        <main id="main" role="main">
+            <article>
+                <div id="mainVisual">
+                <section>
+<div style="text-align:center">
+<h3>Input and Post Method sample</h3>
+<form action="trPost" method="POST" class="form-inline">
+<input type="hidden" id="pathID" name="pathID" value="sample">
+<input type="text" id="sample01" name="sample01"><br>
+<input type="text" id="sample02" name="sample02">
+<br>
+<button type="submit" name="submission" class="btn-square-pop01" value="submission_result">Add</button>
+
+ </section>
+</div>
+</article>
+</main>
+</div>
+</div>
+{% endblock %}
